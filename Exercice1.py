@@ -1,8 +1,11 @@
+import random
 from math import pi
 
 """
 EXERCICE 1
 """
+
+
 class StringFoo:
     def __init__(self):
         self.message = "initialiser à rien"
@@ -22,6 +25,8 @@ str1.print_string()
 """
 EXERCICE 2
 """
+
+
 class Rectangle:
     def __init__(self, longueur, largeur):
         self.longueur = longueur
@@ -32,7 +37,7 @@ class Rectangle:
         self.aire = self.longueur * self.largeur
 
     def afficher_infos(self):
-        print(self.aire)
+        print(f"{self.aire} = {self.longueur} + {self.largeur}")
 
 
 r = Rectangle(10, 9)
@@ -42,6 +47,8 @@ r.afficher_infos()
 """
 EXERCICE 3
 """
+
+
 class Cercle:
     def __init__(self, rayon):
         self.rayon = rayon
@@ -67,14 +74,32 @@ c.afficher_infos()
 """
 EXERCICE 4
 """
+
+
 class Hero:
-    def __init__(self, vie, attaque, defense, nom):
-        self.vie = vie
-        self.attaque = attaque
-        self.defense = defense
+    def __init__(self, nom):
+        self.vie = random.randint(1, 10) + random.randint(1, 10)
+        self.attaque = random.randint(1, 6)
+        self.defense = random.randint(1, 6)
         self.nom = nom
+        self.dommage = 0
 
     def faire_attaque(self):
+        return random.randint(1, 6) + self.attaque
+
+    def recevoir_dommage(self, dmg):
+        self.dommage = dmg
+        self.vie -= self.dommage + self.attaque
+
+    def en_vie(self):
+        if self.vie > 0:
+            print("En vie")
+            return True
+        else:
+            print("Mort")
+            return False
 
 
-hero = Hero(5, 1, 1, "Caesar")
+hero = Hero("Caesar")
+hero.recevoir_dommage(15)
+hero.en_vie()
