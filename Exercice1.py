@@ -1,5 +1,9 @@
 import random
 from math import pi
+from dataclasses import dataclass
+
+
+
 
 """
 EXERCICE 1
@@ -75,6 +79,15 @@ c.afficher_infos()
 EXERCICE 4
 """
 
+@dataclass
+class DnD:
+    force = random.randint(1, 20)
+    dexterite = random.randint(1, 20)
+    constitution = random.randint(1, 20)
+    intelligence = random.randint(1, 20)
+    sagesse = random.randint(1, 20)
+    charisme = random.randint(1, 20)
+
 
 class Hero:
     def __init__(self, nom):
@@ -83,6 +96,7 @@ class Hero:
         self.defense = random.randint(1, 6)
         self.nom = nom
         self.dommage = 0
+        self.stats = DnD()
 
     def faire_attaque(self):
         return random.randint(1, 6) + self.attaque
@@ -103,3 +117,13 @@ class Hero:
 hero = Hero("Caesar")
 hero.recevoir_dommage(15)
 hero.en_vie()
+print(hero.stats.force)
+
+"""
+EXERCICE 5
+"""
+
+
+# force, dextérité, constitution, intelligence, sagesse et charisme
+
+
