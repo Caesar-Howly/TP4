@@ -3,8 +3,6 @@ from math import pi
 from dataclasses import dataclass
 
 
-
-
 """
 EXERCICE 1
 """
@@ -79,6 +77,45 @@ c.afficher_infos()
 EXERCICE 4
 """
 
+
+class Hero:
+    def __init__(self, nom):
+        self.vie = random.randint(1, 10) + random.randint(1, 10)
+        self.attaque = random.randint(1, 6)
+        self.defense = random.randint(1, 6)
+        self.nom = nom
+        self.dommage = 0
+        # self.stats = DnD()
+
+    def faire_attaque(self):
+        return random.randint(1, 6) + self.attaque
+
+    def recevoir_dommage(self, dmg):
+        self.dommage = dmg
+        self.vie -= self.dommage - self.defense
+
+    def en_vie(self):
+        if self.vie > 0:
+            print("En vie")
+            return True
+        else:
+            print("Mort")
+            return False
+
+
+hero = Hero("Caesar")
+hero.recevoir_dommage(15)
+hero.en_vie()
+# print(hero.stats.force)
+
+"""
+EXERCICE 5 + 6
+"""
+
+
+# force, dextérité, constitution, intelligence, sagesse et charisme
+
+
 @dataclass
 class DnD:
     force = random.randint(1, 20)
@@ -103,7 +140,7 @@ class Hero:
 
     def recevoir_dommage(self, dmg):
         self.dommage = dmg
-        self.vie -= self.dommage + self.attaque
+        self.vie -= self.dommage - self.defense
 
     def en_vie(self):
         if self.vie > 0:
@@ -118,12 +155,3 @@ hero = Hero("Caesar")
 hero.recevoir_dommage(15)
 hero.en_vie()
 print(hero.stats.force)
-
-"""
-EXERCICE 5
-"""
-
-
-# force, dextérité, constitution, intelligence, sagesse et charisme
-
-
