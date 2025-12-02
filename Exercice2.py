@@ -24,7 +24,7 @@ print(stat)
 
 
 class NPC:
-    def __init__(self, nom, race, espece, profession):
+    def __init__(self):
         self.force = stats()
         self.agilite = stats()
         self.constitution = stats()
@@ -32,22 +32,54 @@ class NPC:
         self.sagesse = stats()
         self.charisme = stats()
         self.classe_armour = random.randint(1, 12)
-        self.nom = nom
-        self.race = race
-        self.espece = espece
+        self.nom = ""
+        self.race = ""
+        self.espece = ""
         self.point_de_vie = 20
-        self.profession = profession
+        self.profession = ""
 
     def show_characteristics(self):
-        print(f"Force =")
-        print(f"Agilité = ")
-        print(f"Constitution = ")
-        print(f"Intelligence = ")
-        print(f"Sagesse = ")
-        print(f"Charisme = ")
-        print(f"Classe d'armour = ")
-        print(f"Nom = ")
-        print(f"Race = ")
-        print(f"Espece = ")
-        print(f"Vie = ")
-        print(f"Profession = ")
+        print(f"Force = `{self.force}")
+        print(f"Agilité = {self.agilite}")
+        print(f"Constitution = {self.constitution}")
+        print(f"Intelligence = {self.intelligence}")
+        print(f"Sagesse = {self.sagesse}")
+        print(f"Charisme = {self.charisme}")
+        print(f"Classe d'armour = {self.classe_armour}")
+        print(f"Nom = {self.nom}")
+        print(f"Race = {self.race}")
+        print(f"Espece = {self.espece}")
+        print(f"Vie = {self.point_de_vie}")
+        print(f"Profession = {self.profession}")
+
+
+class Kobold(NPC):
+    def __init__(self):
+        super().__init__()
+
+    def faire_attaque(self, cible):
+        pass
+
+    def subir_dommage(self, degats):
+        self.point_de_vie = self.point_de_vie - degats
+
+
+class Hero(NPC):
+
+    def __init(self):
+        super().__init__()
+
+    def faire_attaque(self, cible):
+        dommage = random.randint(1, 20)
+        if dommage == 20:
+            cible.subir_degats(8)
+        elif dommage == 1:
+            pass
+        else:
+            if dommage > cible.classe_armour:
+                cible.subir_degats(6)
+            else:
+                pass
+
+    def subir_dommage(self, degats):
+        self.point_de_vie = self.point_de_vie - degats
