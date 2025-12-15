@@ -83,6 +83,7 @@ class Hero(NPC):
     def faire_attaque(self, cible):
         dommage = random.randint(1, 20)
         if dommage == 20:
+            print("Attaque critique!")
             cible.subir_degats(8)
         elif dommage == 1:
             pass
@@ -90,7 +91,7 @@ class Hero(NPC):
             if dommage > cible.classe_armour:
                 cible.subir_degats(6)
             else:
-                pass
+                cible.subir_degats(dommage)
 
     def subir_dommage(self, degats):
         self.point_de_vie = self.point_de_vie - degats
