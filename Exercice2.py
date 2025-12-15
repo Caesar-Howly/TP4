@@ -57,8 +57,18 @@ class Kobold(NPC):
     def __init__(self):
         super().__init__()
 
+    @staticmethod
     def faire_attaque(self, cible):
-        pass
+        dommage = random.randint(1, 20)
+        if dommage == 20:
+            cible.subir_degats(8)
+        elif dommage == 1:
+            pass
+        else:
+            if dommage > cible.classe_armour:
+                cible.subir_degats(6)
+            else:
+                pass
 
     def subir_dommage(self, degats):
         self.point_de_vie = self.point_de_vie - degats
@@ -69,6 +79,7 @@ class Hero(NPC):
     def __init(self):
         super().__init__()
 
+    @staticmethod
     def faire_attaque(self, cible):
         dommage = random.randint(1, 20)
         if dommage == 20:
