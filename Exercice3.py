@@ -1,10 +1,5 @@
 import random
-
-
-"""
-EXERCICE 2
-"""
-
+from enum import Enum
 
 def stats():
     de_1 = random.randint(1, 6)
@@ -28,6 +23,19 @@ stat = stats()
 print(stat)
 
 
+class Status(Enum):
+    lawful_good = 1
+    lawful_neutral = 2
+    lawful_evil = 3
+    neutral_good = 4
+    true_neutral = 5
+    neutral_evil = 6
+    chaotic_good = 7
+    chaotic_neutral = 8
+    chaotic_evil = 9
+    non_defini = 10
+
+
 class NPC:
     def __init__(self):
         self.force = stats()
@@ -42,6 +50,7 @@ class NPC:
         self.espece = ""
         self.point_de_vie = 20
         self.profession = ""
+        self.enum = Enum(random.randint(1, 10))
 
     def show_characteristics(self):
         print(f"Force = `{self.force}")
