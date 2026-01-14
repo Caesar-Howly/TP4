@@ -1,5 +1,7 @@
 import random
 from enum import Enum
+from dataclasses import dataclass
+
 
 def stats():
     de_1 = random.randint(1, 6)
@@ -87,6 +89,12 @@ class Kobold(NPC):
     def subir_dommage(self, degats):
         self.point_de_vie = self.point_de_vie - degats
 
+    def en_vie(self):
+        if self.point_de_vie > 0:
+            return True
+        else:
+            return False
+
 
 class Hero(NPC):
 
@@ -109,3 +117,28 @@ class Hero(NPC):
 
     def subir_dommage(self, degats):
         self.point_de_vie = self.point_de_vie - degats
+
+    def en_vie(self):
+        if self.point_de_vie > 0:
+            return True
+        else:
+            return False
+
+
+@dataclass
+class Item:
+    item = ""
+    quantity = int()
+
+
+class Inventory:
+    def __init__(self):
+        self.list_item = []
+
+    def add_item(self):
+        added_item = input("What item do you want")
+        self.list_item.append(added_item)
+
+    def remove_item(self):
+        removed_item = input("What item do you not want")
+        self.list_item.remove(removed_item)
