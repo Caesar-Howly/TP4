@@ -127,18 +127,38 @@ class Hero(NPC):
 
 @dataclass
 class Item:
-    item = ""
-    quantity = int()
+    name: str
+    quantity: int
+
+
+i = Item("or", 2)
 
 
 class Inventory:
     def __init__(self):
         self.list_item = []
 
-    def add_item(self):
-        added_item = input("What item do you want")
-        self.list_item.append(added_item)
+    def add_item(self, item_a_ajouter: Item):
+         self.list_item.append(item_a_ajouter)
+         for i in self.list_item:
+             if i == item_a_ajouter:
 
-    def remove_item(self):
-        removed_item = input("What item do you not want")
-        self.list_item.remove(removed_item)
+         else:
+             i.append
+
+        """
+        si item présent, modifier quantité
+        si item != present, ajouter directement 
+        """
+        pass
+
+    def remove_item(self, nom_item, qte_item):
+        pass
+
+inv = Inventory()
+i = Item("or", 2)
+inv.add_item(i)
+inv.add_item(Item("argent", 2))
+inv.add_item(Item("or", 2))
+print(inv.list_item)
+inv.remove_item("or", 2)
