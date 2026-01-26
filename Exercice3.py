@@ -149,12 +149,26 @@ class Inventory:
                 self.list_item.append(item_a_ajouter)
 
     def remove_item(self, nom_item, qte_item):
+        item_trouvee = False
         if len(self.list_item) <= 0:
-            pass
-        else:
-            for item in self.list_item:
-                if item.name == nom_item.name:
-                    item.quantity -= qte_item.quantity
+            return
+
+        for item in self.list_item:
+
+            if item.name == nom_item:
+                item_trouvee = True
+                if item.quantity - qte_item > 0:
+                    item.quantity -= qte_item
+                elif item.quantity - qte_item == 0:
+                    self.list_item.remove(item)
+                else:
+                    print("Erreur: tu essaies d'enlever plus que tu as. Rien n'est enlevé")
+
+        if not item_trouvee:
+            print("Erreur: tu essaies d'enlever un objet qui n'est pas dans ton sac. Rien n'est enlevé")
+
+    def view_inventory(self):
+        print(self.list_item)
 
 
 inv = Inventory()
@@ -162,5 +176,5 @@ objet = Item("or", 2)
 inv.add_item(objet)
 inv.add_item(Item("argent", 2))
 inv.add_item(Item("or", 2))
-print(inv.list_item)
-inv.remove_item("or", 2)
+inv.remove_item("argent", 1)
+inv.view_inventory()
