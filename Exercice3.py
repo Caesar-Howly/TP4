@@ -131,33 +131,35 @@ class Item:
     quantity: int
 
 
-i = Item("or", 2)
-
-
 class Inventory:
     def __init__(self):
         self.list_item = []
 
     def add_item(self, item_a_ajouter: Item):
-         self.list_item.append(item_a_ajouter)
-         for i in self.list_item:
-             if i == item_a_ajouter:
+        item_found = False
+        if len(self.list_item) <= 0:
+            self.list_item.append(item_a_ajouter)
+        else:
+            for item in self.list_item:
+                if item.name == item_a_ajouter.name:
+                    item.quantity += item_a_ajouter.quantity
+                    item_found = True
 
-         else:
-             i.append
-
-        """
-        si item présent, modifier quantité
-        si item != present, ajouter directement 
-        """
-        pass
+            if not item_found:
+                self.list_item.append(item_a_ajouter)
 
     def remove_item(self, nom_item, qte_item):
-        pass
+        if len(self.list_item) <= 0:
+            pass
+        else:
+            for item in self.list_item:
+                if item.name == nom_item.name:
+                    item.quantity -= qte_item.quantity
+
 
 inv = Inventory()
-i = Item("or", 2)
-inv.add_item(i)
+objet = Item("or", 2)
+inv.add_item(objet)
 inv.add_item(Item("argent", 2))
 inv.add_item(Item("or", 2))
 print(inv.list_item)
