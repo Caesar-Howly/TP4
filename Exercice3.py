@@ -26,9 +26,9 @@ print(stat)
 
 
 class Status(Enum):
-    lawful_good = 1
-    lawful_neutral = 2
-    lawful_evil = 3
+    LAWFUL_GOOD = 1
+    LAWFUL_NEUTRAL = 2
+    LAWFUL_EVIL = 3
     neutral_good = 4
     true_neutral = 5
     neutral_evil = 6
@@ -67,62 +67,6 @@ class NPC:
         print(f"Espece = {self.espece}")
         print(f"Vie = {self.point_de_vie}")
         print(f"Profession = {self.profession}")
-
-
-class Kobold(NPC):
-    def __init__(self):
-        super().__init__()
-
-    @staticmethod
-    def faire_attaque(cible):
-        dommage = random.randint(1, 20)
-        if dommage == 20:
-            cible.subir_degats(8)
-        elif dommage == 1:
-            pass
-        else:
-            if dommage > cible.classe_armour:
-                cible.subir_degats(6)
-            else:
-                pass
-
-    def subir_dommage(self, degats):
-        self.point_de_vie = self.point_de_vie - degats
-
-    def en_vie(self):
-        if self.point_de_vie > 0:
-            return True
-        else:
-            return False
-
-
-class Hero(NPC):
-
-    def __init(self):
-        super().__init__()
-
-    @staticmethod
-    def faire_attaque(cible):
-        dommage = random.randint(1, 20)
-        if dommage == 20:
-            print("Attaque critique!")
-            cible.subir_degats(8)
-        elif dommage == 1:
-            pass
-        else:
-            if dommage > cible.classe_armour:
-                cible.subir_degats(6)
-            else:
-                cible.subir_degats(dommage)
-
-    def subir_dommage(self, degats):
-        self.point_de_vie = self.point_de_vie - degats
-
-    def en_vie(self):
-        if self.point_de_vie > 0:
-            return True
-        else:
-            return False
 
 
 @dataclass
@@ -169,6 +113,66 @@ class Inventory:
 
     def view_inventory(self):
         print(self.list_item)
+
+
+class Hero(NPC):
+
+    def __init(self):
+        super().__init__()
+        self.bag = Inventory()
+
+    @staticmethod
+    def faire_attaque(cible):
+        dommage = random.randint(1, 20)
+        if dommage == 20:
+            print("Attaque critique!")
+            cible.subir_degats(8)
+        elif dommage == 1:
+            print("Miss")
+        else:
+            if dommage > cible.classe_armour:
+                cible.subir_degats(6)
+            else:
+                cible.subir_degats(dommage)
+
+    def add_to_bag(self, item_to_add: Item):
+        self.bag.add_item(item_to_add)
+
+    def subir_dommage(self, degats):
+        self.point_de_vie = self.point_de_vie - degats
+
+    def en_vie(self):
+        if self.point_de_vie > 0:
+            return True
+        else:
+            return False
+
+
+class Kobold(NPC):
+    def __init__(self):
+        super().__init__()
+
+    @staticmethod
+    def faire_attaque(cible):
+        dommage = random.randint(1, 20)
+        if dommage == 20:
+            cible.subir_degats(8)
+        elif dommage == 1:
+            print("Critical miss")
+        else:
+            if dommage > cible.classe_armour:
+                cible.subir_degats(6)
+            else:
+                print("Attack ineffective")
+
+    def subir_dommage(self, degats):
+        self.point_de_vie = self.point_de_vie - degats
+
+    def en_vie(self):
+        if self.point_de_vie > 0:
+            return True
+        else:
+            return False
 
 
 inv = Inventory()

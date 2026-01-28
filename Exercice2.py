@@ -7,21 +7,10 @@ EXERCICE 2
 
 
 def stats():
-    de_1 = random.randint(1, 6)
-    de_2 = random.randint(1, 6)
-    de_3 = random.randint(1, 6)
-    de_4 = random.randint(1, 6)
-
-    list_of_dice = [de_1, de_2, de_3, de_4]
-    smallest_die = list_of_dice[0]
-
-    for i in list_of_dice:
-        if i < smallest_die:
-            smallest_die = i
-
-    ans = de_1 + de_2 + de_3 + de_4 - smallest_die
-
-    return ans
+    list_of_dice = [random.randint(1,6) for _ in range(4)]
+    list_of_dice.sort(reverse=True)
+    list_of_dice.pop()
+    return sum(list_of_dice)
 
 
 stat = stats()
@@ -68,12 +57,12 @@ class Kobold(NPC):
         if dommage == 20:
             cible.subir_degats(8)
         elif dommage == 1:
-            pass
+            print("Miss")
         else:
             if dommage > cible.classe_armour:
                 cible.subir_degats(6)
             else:
-                pass
+                print("Miss")
 
     def subir_dommage(self, degats):
         self.point_de_vie = self.point_de_vie - degats
@@ -91,7 +80,7 @@ class Hero(NPC):
             print("Attaque critique!")
             cible.subir_degats(8)
         elif dommage == 1:
-            pass
+            print("Miss")
         else:
             if dommage > cible.classe_armour:
                 cible.subir_degats(6)
